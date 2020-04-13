@@ -1,10 +1,11 @@
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 public class MineFieldButton extends JButton {
 	
-	public MineFieldButton(ActionListener) {
+	public MineFieldButton(ActionListener actionListener) {
 		
 	}
 	
@@ -21,6 +22,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isStart() {
+		return true;
 		
 	}
 	
@@ -29,6 +31,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isEnd() {
+		return false;
 		
 	}
 	
@@ -37,6 +40,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isMine() {
+		return true;
 		
 	}
 	
@@ -45,6 +49,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isOnPath() {
+		return true;
 		
 	}
 	
@@ -79,6 +84,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public int getNearbyMineCount() {
+		return 1;
 		
 	}
 	
@@ -95,6 +101,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public Color getNearbyMineColor(int mineCount) {
+		return Color.red;
 		
 	}
 	
