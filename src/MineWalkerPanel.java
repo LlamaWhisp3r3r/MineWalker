@@ -1,8 +1,13 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MineWalkerPanel extends JPanel {
 
 	
+	private static final String Add = null;
 	int MAXLIVES = 3;
 	int MAXPOINTS = 999999999;
 	int LivesPerMine = 1;
@@ -14,10 +19,13 @@ public class MineWalkerPanel extends JPanel {
 	
 	
 	MineWalkerPanel fieldPanel;
+	MineFieldPanel MineFieldPanel;
 	
+	JPanel scorePanel;
+	JLabel scoreLabel;
 	
 	public MineWalkerPanel() {
-		FieldPanel();
+		addMineFieldPanel();
 		ScorePanel();
 		KeyPanel();
 		ControlPanel();
@@ -33,39 +41,74 @@ public class MineWalkerPanel extends JPanel {
 	
 
 
+	private class FieldPanelListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			//when fieldpanel is clicked
+		}
+	}
 
 
-
-	public void FieldPanel() {
-	} 
+	public void addMineFieldPanel() {
+		MineFieldPanel = new MineFieldPanel();
+		this.add(MineFieldPanel);
+	}
+	
 	public void ScorePanel() {
+		scorePanel = new JPanel();
+		scoreLabel = new JLabel();
+		scoreLabel.setText("hello");
+		scorePanel.add(scoreLabel);
+		this.add(scorePanel);
 	}
+	
 	public void KeyPanel() {
+		
     }
+	
 	public void ControlPanel() {
+		
 	}
+	
 	public void newGame() {
+		//clear MineWalkerPanel
+		
 	}
+	
 	public void giveUp() {
+		
 	}
+	
 	public void win() {
+		System.out.println("You win");
 	}
+	
 	public void lose() {
+		
 	}
-	public void GameOver(byte... VariableDeclaratorId) {
+	
+	public void GameOver() {
+		
 	}
+	
 	public void resetScore() {
+		
 	}
 	
 	boolean isGameOver() {
 		return true;
 	}
-	public void addPoints(byte... VariableDeclaratorId) {
+	
+	public void addPoints(int AmountOfPoints) {
+		
 	}
-	public void addLives(byte... VariableDeclaratorId) {
+	
+	public void addLives(int AmountOfLives) {
+		
 	}
+	
 	int getGridSizeInput() {
 		return 1;
 	}
+	
 }
-
