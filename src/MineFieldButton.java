@@ -51,19 +51,27 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public void showMine() {
-		
+		if (isMine = true) {
+			ACTIVE_COLOR = MINE_COLOR;
+		}
 	}
 	
 	public void hideMine() {
-		
+		if (isMine = true) {
+			ACTIVE_COLOR = DEFAULT_COLOR;
+		}
 	}
 	
 	public void showPath() {
-		
+		if (isOnPath = true) {
+			ACTIVE_COLOR = PATH_COLOR;
+		}
 	}
 	
 	public void hidePath() {
-		
+		if (isOnPath = true) {
+			
+		}
 	}
 	
 	public void activate() {
