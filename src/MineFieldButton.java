@@ -5,7 +5,7 @@ import javax.swing.JButton;
 
 public class MineFieldButton extends JButton {
 	
-	//missing the variables. I'm sorry.
+	
 	public MineFieldButton(ActionListener actionListener) {
 		
 	}
@@ -23,7 +23,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isStart() {
-		return true;
+		return isStart;
 	}
 	
 	public void setIsEnd(boolean newEnd) {
@@ -31,7 +31,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isEnd() {
-		return false;
+		return isEnd;
 	}
 	
 	public void setIsMine(boolean newMine) {
@@ -39,15 +39,15 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isMine() {
-		return false;
+		return isMine;
 	}
 	
 	public void setOnPath(boolean newPath) {
-		
+		isOnPath = newPath;
 	}
 	
 	public boolean isOnPath() {
-		return true;
+		return isOnPath;
 	}
 	
 	public void showMine() {
