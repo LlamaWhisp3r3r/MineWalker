@@ -105,10 +105,6 @@ public class MineFieldButton extends JButton {
 	
 	public Color getNearbyMineColor(int mineCount) {
 		return Color.red;
-<<<<<<< HEAD
-=======
-		
->>>>>>> refs/heads/master
 	}
 	
 	
