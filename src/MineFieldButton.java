@@ -4,8 +4,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public class MineFieldButton extends JButton {
-	
-	
+
+
+
 	public MineFieldButton(ActionListener actionListener) {
 		
 	}
@@ -53,33 +54,52 @@ public class MineFieldButton extends JButton {
 	public void showMine() {
 		if (isMine = true) {
 			ACTIVE_COLOR = MINE_COLOR;
+			mineShowing = true;
 		}
+		
 	}
 	
 	public void hideMine() {
-		if (isMine = true) {
+		if (mineShowing = true) {
 			ACTIVE_COLOR = DEFAULT_COLOR;
+			mineShowing = false;
 		}
+		
 	}
 	
 	public void showPath() {
 		if (isOnPath = true) {
 			ACTIVE_COLOR = PATH_COLOR;
+			pathShowing = true;
 		}
 	}
 	
 	public void hidePath() {
-		if (isOnPath = true) {
-			
+		if (pathShowing = true) {
+			ACTIVE_COLOR = DEFAULT_COLOR;
+			pathShowing = false;
 		}
 	}
 	
 	public void activate() {
-		
+		switch (this.getNearbyMineCount()) {
+			case 0:
+				ACTIVE_COLOR = Color.green;
+			case 1:
+				ACTIVE_COLOR = Color.yellow;
+			case 2:
+				ACTIVE_COLOR = Color.orange;
+			case 3:
+				ACTIVE_COLOR = Color.red;
+		}
+		active = true;
 	}
 	
 	public void deactivate() {
-		
+		if (active = true) {
+			ACTIVE_COLOR = DEFAULT_COLOR;
+			active = false;
+		}
 	}
 	
 	
@@ -88,8 +108,9 @@ public class MineFieldButton extends JButton {
 		
 	}
 	
-	public int getNearbyMineCount() {
-		return 0;
+	private int getNearbyMineCount() {
+		return 1;
+
 	}
 	
 	public void activateNeighbors() {
