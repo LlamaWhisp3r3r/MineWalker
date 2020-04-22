@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 public class MineFieldPanel extends JPanel {
 
 	private final int DEFAULT_GRID_SIZE = 10;
-	private final double MIN_MINE_PERCENT = 20;
+	//private final double MIN_MINE_PERCENT = 20;
 	private final double DEFAULT_MINE_PERCENT = 25;
-	private final double MAX_MINE_PERCENT = 35;
+	//private final double MAX_MINE_PERCENT = 35;
 	private int gridSize;
 	private MineFieldButton[][] grid;
 	private int numMines;
@@ -28,6 +28,7 @@ public class MineFieldPanel extends JPanel {
 		
 		// Creates each button, adds an action listener to them, and adds them to the panel
 		goThroughGrid(0);
+		addAllNeighbors();
 	}
 	
 	public MineFieldPanel(int gridSize, ActionListener listener) {
@@ -41,6 +42,8 @@ public class MineFieldPanel extends JPanel {
 		
 		// Creates each button, adds an action listener to them, and adds them to the panel					
 		goThroughGrid(0);
+		
+		addAllNeighbors();
 	}
 	
 	private void goThroughGrid(int flagInt) {
@@ -80,6 +83,21 @@ public class MineFieldPanel extends JPanel {
 						numMines--;
 					}
 					break;
+					
+				case 7:
+					if (i - 1 >= 0) 
+						grid[i][j].addNeighbor(grid[i - 1][j]);
+					
+					if(i + 1 <= grid.length) 
+						grid[i][j].addNeighbor(grid[i + 1][j]);
+					
+					if(j - 1 >= 0) 
+						grid[i][j].addNeighbor(grid[i][j - 1]);
+					
+					if(j + 1 <= grid.length ) 
+						grid[i][j].addNeighbor(grid[i][j + 1]);
+					
+					break;
 				}
 			}		
 		}
@@ -114,14 +132,13 @@ public class MineFieldPanel extends JPanel {
 	}
 	
 	private void addAllNeighbors() {
-		
-		
+		goThroughGrid(7);
 	}
 	
-	private void addNeighbor(int a, int b, int c, int d) {
-
-		
-	}
+	// I have no Idea what to do with this method so i'll coomment it out for now.
+	//private void addNeighbor(int a, int b, int c, int d) {
+	//
+	//}
 	
 	public void setNumberOfMInes(double minePercent) {
 		numMines = (int) Math.pow(gridSize, 2);
