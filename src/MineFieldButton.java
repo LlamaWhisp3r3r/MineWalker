@@ -4,7 +4,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public class MineFieldButton extends JButton {
-	
+
+	//missing the variables. I'm sorry.
+
 	public MineFieldButton(ActionListener actionListener) {
 		
 	}
@@ -18,30 +20,31 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public void setIsStart(boolean newStart) {
-		
+		isStart = newStart;
 	}
 	
 	public boolean isStart() {
 		return true;
-		
+
 	}
 	
 	public void setIsEnd(boolean newEnd) {
-		
+		isEnd = newEnd;
 	}
 	
 	public boolean isEnd() {
 		return false;
-		
+
 	}
 	
 	public void setIsMine(boolean newMine) {
-		
+		isMine = newMine;
 	}
 	
 	public boolean isMine() {
-		return true;
-		
+
+		return false;
+
 	}
 	
 	public void setOnPath(boolean newPath) {
@@ -50,7 +53,7 @@ public class MineFieldButton extends JButton {
 	
 	public boolean isOnPath() {
 		return true;
-		
+
 	}
 	
 	public void showMine() {
@@ -78,14 +81,14 @@ public class MineFieldButton extends JButton {
 	}
 	
 	
-	// I don't know if these were supposed to be private.
+	
 	public void setCurrentLocationText(boolean current) {
 		
 	}
 	
 	public int getNearbyMineCount() {
 		return 1;
-		
+
 	}
 	
 	public void activateNeighbors() {
@@ -102,7 +105,10 @@ public class MineFieldButton extends JButton {
 	
 	public Color getNearbyMineColor(int mineCount) {
 		return Color.red;
+<<<<<<< HEAD
+=======
 		
+>>>>>>> refs/heads/master
 	}
 	
 	
