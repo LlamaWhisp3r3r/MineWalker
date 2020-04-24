@@ -1,14 +1,16 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MineWalkerPanel extends JPanel {
 
 	
-	private static final String Add = null;
-	int MAXLIVES = 3;
+	private static final 
+	int MAXLIVES = 1;
 	int MAXPOINTS = 999999999;
 	int LivesPerMine = 1;
 	int PointsPerMine = 10000;
@@ -18,11 +20,15 @@ public class MineWalkerPanel extends JPanel {
 	int score;
 	
 	
-	MineWalkerPanel fieldPanel;
+	
 	MineFieldPanel MineFieldPanel;
+	
 	
 	JPanel scorePanel;
 	JLabel scoreLabel;
+	JPanel keyPanel;
+	JPanel controlPanel;
+	JButton showMines;
 	
 	public MineWalkerPanel() {
 		addMineFieldPanel();
@@ -39,9 +45,29 @@ public class MineWalkerPanel extends JPanel {
 		int addLives;
 		}
 	
+	
+	private class resetButtonListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			newGame();
+			
+		}
+	}
 
+
+	
+	private class showMinesListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			MineFieldPanel.showMines();
+			
+		}
+	}
 
 	private class FieldPanelListener implements ActionListener {
+		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			//when fieldpanel is clicked
@@ -50,24 +76,41 @@ public class MineWalkerPanel extends JPanel {
 
 
 	public void addMineFieldPanel() {
-		MineFieldPanel = new MineFieldPanel();
+		MineFieldPanel = new MineFieldPanel(ActionListener);
 		this.add(MineFieldPanel);
 	}
 	
+	
+
 	public void ScorePanel() {
 		scorePanel = new JPanel();
 		scoreLabel = new JLabel();
-		scoreLabel.setText("hello");
+		scoreLabel.setText("678656578");
 		scorePanel.add(scoreLabel);
 		this.add(scorePanel);
 	}
 	
 	public void KeyPanel() {
-		
+		JButton zeroMines = new JButton();
+		zeroMines.setBackground(Color.GREEN);
+		zeroMines.setText("0 mines nearby");
+		zeroMines.setSize(20, 20);
+		keyPanel.add(zeroMines);
+		this.add(keyPanel);
     }
 	
 	public void ControlPanel() {
+		controlPanel = new JPanel();
 		
+		JButton resetBut = new JButton();
+		resetBut.setText("Reset");
+		resetBut.addActionListener(new resetButtonListener());
+		showMines = new JButton();
+		showMines.setText("show Mines");
+		
+		controlPanel.add(resetBut);
+		this.add(controlPanel);
+				
 	}
 	
 	public void newGame() {
@@ -80,7 +123,7 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void win() {
-		System.out.println("You win");
+		
 	}
 	
 	public void lose() {
