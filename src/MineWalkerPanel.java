@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 
 public class MineWalkerPanel extends JPanel {
@@ -66,6 +69,28 @@ public class MineWalkerPanel extends JPanel {
 	}
 	int getGridSizeInput() {
 		return 1;
+	}
+	
+	
+	private class MineFieldButtonListener implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			MineFieldButton clicked = (MineFieldButton) e.getSource();
+			
+			clicked.visit();
+		}
+	}
+	
+	private class ShowMinesListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			
+		}
+		
 	}
 }
 
