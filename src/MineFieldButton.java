@@ -1,4 +1,5 @@
 import java.awt.Color;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -6,6 +7,22 @@ import javax.swing.JButton;
 public class MineFieldButton extends JButton {
 
 	//missing the variables. I'm sorry.
+	private final Color START_COLOR;
+	private final Color DESTINATION_COLOR;
+	private final Color DEFAULT_COLOR;
+	private final Color ACTIVE_COLOR;
+	private final Color MINE_COLOR;
+	private final Color PATH_COLOR;
+	private final Color[] NEARBY_COLORS;
+	
+	private boolean mineShowing;
+	private boolean pathShowing;
+	private boolean visited;
+	private boolean active;
+	private boolean onPath;
+	private boolean isMine;
+	private boolean isStart;
+	private boolean isEnd;
 
 	public MineFieldButton(ActionListener actionListener) {
 		
@@ -105,10 +122,6 @@ public class MineFieldButton extends JButton {
 	
 	public Color getNearbyMineColor(int mineCount) {
 		return Color.red;
-<<<<<<< HEAD
-=======
-		
->>>>>>> refs/heads/master
 	}
 	
 	

@@ -11,7 +11,7 @@ public class MineFieldPanel extends JPanel {
 	//private final double MIN_MINE_PERCENT = 20;
 	private final double DEFAULT_MINE_PERCENT = 25;
 	//private final double MAX_MINE_PERCENT = 35;
-	private int gridSize;
+	public int gridSize;
 	private MineFieldButton[][] grid;
 	private int numMines;
 	private ActionListener listener;
@@ -26,8 +26,11 @@ public class MineFieldPanel extends JPanel {
 		this.setLayout(new GridLayout(grid.length, grid[0].length, 1, 1));
 		this.setPreferredSize(new Dimension(1, 1));
 		
-		// Creates each button, adds an action listener to them, and adds them to the panel
+		// Creates each button, adds an action listener to them, and adds them to the panel 
+		// And adds mines and all neighbors
 		goThroughGrid(0);
+		setNumberOfMInes(DEFAULT_MINE_PERCENT);
+		setMines();
 		addAllNeighbors();
 	}
 	
@@ -42,7 +45,8 @@ public class MineFieldPanel extends JPanel {
 		
 		// Creates each button, adds an action listener to them, and adds them to the panel					
 		goThroughGrid(0);
-		
+		setNumberOfMInes(DEFAULT_MINE_PERCENT);
+		setMines();
 		addAllNeighbors();
 	}
 	
