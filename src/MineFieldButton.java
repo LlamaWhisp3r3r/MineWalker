@@ -5,20 +5,26 @@ import javax.swing.JButton;
 
 public class MineFieldButton extends JButton {
 
-
-
+/* I believe I won't be able to make it to tomorrow's meeting. I would notify
+ * Mr. Endicott, but I personally have no access to my phone, and I don't know exactly
+ * when I will get access. I will try my best to show up, but I cannot promise much.
+ * I apologize and I hope you guys understand.
+ * 	-- Koen Webb
+ */
+	
 	public MineFieldButton(ActionListener actionListener) {
-		
+		ActionListener listen = actionListener;
 	}
 	
 	public void visit() {
-		
+		visited = true;
 	}
 	
 	public void addNeighbor(MineFieldButton button) {
 		
 	}
 	
+	//You should know what these do... Maybe.
 	public void setIsStart(boolean newStart) {
 		isStart = newStart;
 	}
@@ -56,7 +62,6 @@ public class MineFieldButton extends JButton {
 			ACTIVE_COLOR = MINE_COLOR;
 			mineShowing = true;
 		}
-		
 	}
 	
 	public void hideMine() {
@@ -64,7 +69,6 @@ public class MineFieldButton extends JButton {
 			ACTIVE_COLOR = DEFAULT_COLOR;
 			mineShowing = false;
 		}
-		
 	}
 	
 	public void showPath() {
@@ -81,24 +85,21 @@ public class MineFieldButton extends JButton {
 		}
 	}
 	
+	/* Sets the mine's active status to true.
+	 * It also sets the color to the respective color.
+	 */
 	public void activate() {
-		switch (this.getNearbyMineCount()) {
-			case 0:
-				ACTIVE_COLOR = Color.green;
-			case 1:
-				ACTIVE_COLOR = Color.yellow;
-			case 2:
-				ACTIVE_COLOR = Color.orange;
-			case 3:
-				ACTIVE_COLOR = Color.red;
-		}
 		active = true;
 	}
 	
+	//Sets the mine's active state to false.
 	public void deactivate() {
 		if (active = true) {
-			ACTIVE_COLOR = DEFAULT_COLOR;
 			active = false;
+		} else if (active - false) {
+			System.out.println("No action done: Already deactive.");
+		} else {
+			System.out.println("I don't have a clue how you managed to do that.");
 		}
 	}
 	
@@ -110,7 +111,6 @@ public class MineFieldButton extends JButton {
 	
 	private int getNearbyMineCount() {
 		return 1;
-
 	}
 	
 	public void activateNeighbors() {
@@ -125,9 +125,19 @@ public class MineFieldButton extends JButton {
 		
 	}
 	
+	//Gets the color for the mine count.
 	public Color getNearbyMineColor(int mineCount) {
-		return Color.red;
+		Color temp = Color.green;
+		switch (this.getNearbyMineCount()) {
+			case 0:
+				temp = Color.green;
+			case 1:
+				temp = Color.yellow;
+			case 2:
+				temp = Color.orange;
+			case 3:
+				temp = Color.red;
+		}
+		return temp;
 	}
-	
-	
 }
