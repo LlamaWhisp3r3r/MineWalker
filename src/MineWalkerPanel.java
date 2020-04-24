@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -59,7 +62,7 @@ public class MineWalkerPanel extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//when fieldpanel is clicked
+		
 		}
 	}
 
@@ -128,7 +131,7 @@ public class MineWalkerPanel extends JPanel {
 	private void setMaxPoints() {
 		
 		int gridSize = mineFieldPanel.getGridSize();
-		maxPoints = Math.pow(gridSize, 2);
+		maxPoints = Math.pow(gridSize, 2) - mineFieldPanel.getNumberOfMines();
 	}
 	
 	public void lose() {
@@ -159,4 +162,25 @@ public class MineWalkerPanel extends JPanel {
 		return 1;
 	}
 	
+	
+	private class MineFieldButtonListener implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			MineFieldButton clicked = (MineFieldButton) e.getSource();
+			
+			clicked.visit();
+		}
+	}
+	
+	private class ShowMinesListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			
+		}
+		
+	}
 }

@@ -5,27 +5,43 @@ import javax.swing.JButton;
 
 public class MineFieldButton extends JButton {
 
-	//missing the variables. I'm sorry.
-
+	private final Color START_COLOR;
+	private final Color DESTINATION_COLOR;
+	private final Color DEFAULT_COLOR;
+	private final Color ACTIVE_COLOR;
+	private final Color MINE_COLOR;
+	private final Color PATH_COLOR;
+	private final Color[] NEARBY_COLORS;
+	
+	private boolean mineShowing;
+	private boolean pathShowing;
+	private boolean visited;
+	private boolean active;
+	private boolean onPath;
+	private boolean isMine;
+	private boolean isStart;
+	private boolean isEnd;
+	
 	public MineFieldButton(ActionListener actionListener) {
-		
+		//Initialize all final variables here - some may need to be changed to 
+		ActionListener listen = actionListener;
 	}
 	
 	public void visit() {
-		
+		visited = true;
 	}
 	
 	public void addNeighbor(MineFieldButton button) {
 		
 	}
 	
+	//You should know what these do... Maybe.
 	public void setIsStart(boolean newStart) {
 		isStart = newStart;
 	}
 	
 	public boolean isStart() {
-		return true;
-
+		return isStart;
 	}
 	
 	public void setIsEnd(boolean newEnd) {
@@ -33,8 +49,7 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isEnd() {
-		return false;
-
+		return isEnd;
 	}
 	
 	public void setIsMine(boolean newMine) {
@@ -42,42 +57,61 @@ public class MineFieldButton extends JButton {
 	}
 	
 	public boolean isMine() {
-
-		return false;
-
+		return isMine;
 	}
 	
 	public void setOnPath(boolean newPath) {
-		
+		onPath = newPath;
 	}
 	
 	public boolean isOnPath() {
-		return true;
-
+		return onPath;
 	}
 	
 	public void showMine() {
-		
+		if (isMine = true) {
+			ACTIVE_COLOR = MINE_COLOR;
+			mineShowing = true;
+		}
 	}
 	
 	public void hideMine() {
-		
+		if (mineShowing = true) {
+			ACTIVE_COLOR = DEFAULT_COLOR;
+			mineShowing = false;
+		}
 	}
 	
 	public void showPath() {
-		
+		if (onPath = true) {
+			ACTIVE_COLOR = PATH_COLOR;
+			pathShowing = true;
+		}
 	}
 	
 	public void hidePath() {
-		
+		if (pathShowing = true) {
+			ACTIVE_COLOR = DEFAULT_COLOR;
+			pathShowing = false;
+		}
 	}
 	
+	/* Sets the mine's active status to true.
+	 * It also sets the color to the respective color.
+	 */
 	public void activate() {
-		
+		active = true;
 	}
 	
+	//Sets the mine's active state to false.
 	public void deactivate() {
-		
+		if (active = true) {
+			active = false;
+		} else if (active = false) {
+			System.out.println("No action done: Already deactive.");
+		} else {
+			System.out.println("I don't have a clue how you managed to do that.");
+		}
 	}
 	
 	
@@ -86,9 +120,8 @@ public class MineFieldButton extends JButton {
 		
 	}
 	
-	public int getNearbyMineCount() {
+	private int getNearbyMineCount() {
 		return 1;
-
 	}
 	
 	public void activateNeighbors() {
@@ -103,13 +136,19 @@ public class MineFieldButton extends JButton {
 		
 	}
 	
+	//Gets the color for the mine count.
 	public Color getNearbyMineColor(int mineCount) {
-		return Color.red;
-<<<<<<< HEAD
-=======
-		
->>>>>>> refs/heads/master
+		Color temp = Color.green;
+		switch (this.getNearbyMineCount()) {
+			case 0:
+				temp = Color.green;
+			case 1:
+				temp = Color.yellow;
+			case 2:
+				temp = Color.orange;
+			case 3:
+				temp = Color.red;
+		}
+		return temp;
 	}
-	
-	
 }
