@@ -13,7 +13,7 @@ public class MineWalkerPanel extends JPanel {
 	int score;
 	
 	
-	MineWalkerPanel fieldPanel;
+	MineFieldPanel walkerPanel;
 	
 	
 	public MineWalkerPanel() {
