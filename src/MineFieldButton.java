@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
@@ -21,6 +22,7 @@ public class MineFieldButton extends JButton {
 	private boolean isMine;
 	private boolean isStart;
 	private boolean isEnd;
+	private ArrayList<MineFieldButton> nieghbors = new ArrayList<MineFieldButton>();
 	
 	public MineFieldButton() {
 		START_COLOR = Color.blue;
@@ -37,11 +39,12 @@ public class MineFieldButton extends JButton {
 		visited = true;
 	}
 	
-	public void setColor() {
-		this.setBackground(Color.red);
+	public void setColor(Color color) {
+		this.setBackground(color);
 	}
 	
 	public void addNeighbor(MineFieldButton button) {
+		nieghbors.add(button);
 		
 	}
 	
@@ -131,7 +134,13 @@ public class MineFieldButton extends JButton {
 	}
 	
 	private int getNearbyMineCount() {
-		return 1;
+		int mineCount = 0;
+		for(MineFieldButton button : nieghbors) {
+			if(button.isMine()) {
+				mineCount++;
+			}
+		}
+		return mineCount;
 	}
 	
 	public void activateNeighbors() {
@@ -147,17 +156,24 @@ public class MineFieldButton extends JButton {
 	}
 	
 	//Gets the color for the mine count.
-	public Color getNearbyMineColor(int mineCount) {
-		Color temp = Color.green;
-		switch (this.getNearbyMineCount()) {
+	public Color getNearbyMineColor() {
+		
+		Color temp;
+		switch (getNearbyMineCount()) {
 			case 0:
 				temp = Color.green;
+				break;
 			case 1:
 				temp = Color.yellow;
+				break;
 			case 2:
 				temp = Color.orange;
+				break;
 			case 3:
 				temp = Color.red;
+				break;
+			default:
+				temp = Color.green;
 		}
 		return temp;
 	}

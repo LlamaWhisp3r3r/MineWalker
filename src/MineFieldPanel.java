@@ -48,15 +48,6 @@ public class MineFieldPanel extends JPanel {
 		addAllNeighbors();
 	}
 	
-	private class ButtonActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			MineFieldButton button = (MineFieldButton) arg0.getSource();
-			button.setColor();
-		}
-
-	}
 	
 	private void goThroughGrid(int flagInt) {
 		for (int i = 0; i < grid.length; i++) {
