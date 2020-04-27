@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,7 @@ public class MineFieldPanel extends JPanel {
 		setNumberOfMInes(DEFAULT_MINE_PERCENT);
 		setMines();
 		addAllNeighbors();
+		createStartAndEndPoint();
 	}
 	
 	public MineFieldPanel(int gridSize) {
@@ -39,13 +41,14 @@ public class MineFieldPanel extends JPanel {
 		
 		//Sets the size of the grid and the number of buttons in a row.
 		this.setLayout(new GridLayout(grid.length, grid[0].length, 1, 1));
-		this.setPreferredSize(new Dimension(1, 1));
+		this.setPreferredSize(new Dimension(500, 500));
 		
 		// Creates each button, adds an action listener to them, and adds them to the panel					
 		goThroughGrid(0);
 		setNumberOfMInes(DEFAULT_MINE_PERCENT);
 		setMines();
 		addAllNeighbors();
+		createStartAndEndPoint();
 	}
 	
 	
@@ -157,6 +160,16 @@ public class MineFieldPanel extends JPanel {
 	
 	public int getGridSize() {
 		return gridSize;
+	}
+	
+	public void createStartAndEndPoint() {
+		System.out.println("Entered createStartPoint");
+		MineFieldButton startButton = grid[gridSize-1][0];
+		MineFieldButton endButton = grid[0][gridSize-1];
+		startButton.activate();
+		startButton.setColor(Color.blue);
+		endButton.setColor(Color.pink);
+		
 	}
 
 

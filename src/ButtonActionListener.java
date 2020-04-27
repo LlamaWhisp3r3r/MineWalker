@@ -7,11 +7,15 @@ public class ButtonActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		MineFieldButton button = (MineFieldButton) arg0.getSource();
-		if(button.isMine()) {
-			button.setColor(Color.black);
-		}else {
-			Color buttonColor = button.getNearbyMineColor();
-			button.setColor(buttonColor);
+		if(button.hasActive()) {
+			if(button.isMine()) {
+				button.setColor(Color.black);
+				button.activate();
+			}else {
+				Color buttonColor = button.getNearbyMineColor();
+				button.setColor(buttonColor);
+				button.activate();
+			}
 		}
 	}
 
