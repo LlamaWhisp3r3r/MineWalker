@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
@@ -16,15 +17,13 @@ public class MineFieldPanel extends JPanel {
 	private int numMines;
 	Random rand = new Random();
 
-	
 	public MineFieldPanel() {
-		
 		gridSize = DEFAULT_GRID_SIZE;
 		grid = new MineFieldButton[gridSize][gridSize];
 		
 		//Sets the size of the grid and the number of buttons in a row.
 		this.setLayout(new GridLayout(grid.length, grid[0].length, 1, 1));
-		this.setPreferredSize(new Dimension(1, 1));
+		this.setPreferredSize(new Dimension(500, 500));
 		
 		// Creates each button, adds an action listener to them, and adds them to the panel 
 		// And adds mines and all neighbors
@@ -36,7 +35,7 @@ public class MineFieldPanel extends JPanel {
 	
 	public MineFieldPanel(int gridSize) {
 		this.gridSize = gridSize;
-		grid = new MineFieldButton[this.gridSize][this.gridSize];
+		grid = new MineFieldButton[gridSize][gridSize];
 		
 		//Sets the size of the grid and the number of buttons in a row.
 		this.setLayout(new GridLayout(grid.length, grid[0].length, 1, 1));
@@ -49,6 +48,16 @@ public class MineFieldPanel extends JPanel {
 		addAllNeighbors();
 	}
 	
+	private class ButtonActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			MineFieldButton button = (MineFieldButton) arg0.getSource();
+			button.setColor();
+		}
+
+	}
+	
 	private void goThroughGrid(int flagInt) {
 		for (int i = 0; i < grid.length; i++) {
 			
@@ -56,7 +65,9 @@ public class MineFieldPanel extends JPanel {
 						
 				switch(flagInt) {
 				case 0:
-					grid[i][j] = new MineFieldButton(new ButtonActionListener());
+					MineFieldButton button = new MineFieldButton();
+					button.addActionListener(new ButtonActionListener());
+					grid[i][j] = button;
 					this.add(grid[i][j]);
 					break;
 				
@@ -91,13 +102,13 @@ public class MineFieldPanel extends JPanel {
 					if (i - 1 >= 0) 
 						grid[i][j].addNeighbor(grid[i - 1][j]);
 					
-					if(i + 1 <= grid.length) 
+					if(i + 1 < grid.length) 
 						grid[i][j].addNeighbor(grid[i + 1][j]);
 					
 					if(j - 1 >= 0) 
 						grid[i][j].addNeighbor(grid[i][j - 1]);
 					
-					if(j + 1 <= grid.length ) 
+					if(j + 1 < grid.length ) 
 						grid[i][j].addNeighbor(grid[i][j + 1]);
 					
 					break;

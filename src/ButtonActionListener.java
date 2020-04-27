@@ -5,8 +5,8 @@ public class ButtonActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
+		MineFieldButton button = (MineFieldButton) arg0.getSource();
+		button.setColor();
 	}
 
 }

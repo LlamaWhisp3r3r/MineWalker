@@ -58,17 +58,10 @@ public class MineWalkerPanel extends JPanel {
 		}
 	}
 
-	private class FieldPanelListener implements ActionListener {
-		
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-		
-		}
-	}
 
 
 	public void addMineFieldPanel() {
-		mineFieldPanel = new MineFieldPanel(new FieldPanelListener());
+		mineFieldPanel = new MineFieldPanel();
 		this.add(mineFieldPanel);
 	}
 	
@@ -83,6 +76,7 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void addKeyPanel() {
+		keyPanel = new JPanel();
 		JButton zeroMines = new JButton();
 		zeroMines.setBackground(Color.GREEN);
 		zeroMines.setText("0 mines nearby");

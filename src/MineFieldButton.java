@@ -8,7 +8,7 @@ public class MineFieldButton extends JButton {
 	private final Color START_COLOR;
 	private final Color DESTINATION_COLOR;
 	private final Color DEFAULT_COLOR;
-	private final Color ACTIVE_COLOR;
+	private Color ACTIVE_COLOR;
 	private final Color MINE_COLOR;
 	private final Color PATH_COLOR;
 	private final Color[] NEARBY_COLORS;
@@ -22,13 +22,23 @@ public class MineFieldButton extends JButton {
 	private boolean isStart;
 	private boolean isEnd;
 	
-	public MineFieldButton(ActionListener actionListener) {
-		//Initialize all final variables here - some may need to be changed to 
-		ActionListener listen = actionListener;
+	public MineFieldButton() {
+		START_COLOR = Color.blue;
+		DESTINATION_COLOR = Color.magenta;
+		DEFAULT_COLOR = Color.white;
+		ACTIVE_COLOR = Color.gray;
+		MINE_COLOR = Color.black;
+		PATH_COLOR = Color.blue;
+		NEARBY_COLORS = new Color[1];
+		
 	}
 	
 	public void visit() {
 		visited = true;
+	}
+	
+	public void setColor() {
+		this.setBackground(Color.red);
 	}
 	
 	public void addNeighbor(MineFieldButton button) {

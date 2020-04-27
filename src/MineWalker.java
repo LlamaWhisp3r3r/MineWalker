@@ -6,7 +6,7 @@ public class MineWalker {
 		
 		JFrame mainFrame = new JFrame();
 		mainFrame.setDefaultCloseOperation(mainFrame.EXIT_ON_CLOSE);
-		mainFrame.getContentPane().add(new MineFieldPanel());
+		mainFrame.getContentPane().add(new MineWalkerPanel());
 		mainFrame.pack();
 		mainFrame.setVisible(true);
 		
