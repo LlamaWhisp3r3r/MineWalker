@@ -15,9 +15,12 @@ public class MineFieldPanel extends JPanel {
 	private MineFieldButton[][] grid;
 	private int numMines;
 	Random rand = new Random();
+
 	
 	public MineFieldPanel() {
-		grid = new MineFieldButton[DEFAULT_GRID_SIZE][DEFAULT_GRID_SIZE];
+		
+		gridSize = DEFAULT_GRID_SIZE;
+		grid = new MineFieldButton[gridSize][gridSize];
 		
 		//Sets the size of the grid and the number of buttons in a row.
 		this.setLayout(new GridLayout(grid.length, grid[0].length, 1, 1));
@@ -53,7 +56,7 @@ public class MineFieldPanel extends JPanel {
 						
 				switch(flagInt) {
 				case 0:
-					grid[i][j] = new MineFieldButton(listener);
+					grid[i][j] = new MineFieldButton(new ButtonActionListener());
 					this.add(grid[i][j]);
 					break;
 				
@@ -153,6 +156,8 @@ public class MineFieldPanel extends JPanel {
 	public int getGridSize() {
 		return gridSize;
 	}
+
+
 }
 	
 	

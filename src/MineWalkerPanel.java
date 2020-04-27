@@ -2,29 +2,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MineWalkerPanel extends JPanel {
 
 	
-	private static final 
-	int MAXLIVES = 1;
-	int MAXPOINTS = 999999999;
-	int LivesPerMine = 1;
-	int PointsPerMine = 10000;
-	int PointsPerStep = 100000000;
+	private final int MAX_LIVES = 5;
+	double maxPoints;
+	private int livesPerMine = -1;
+	private int pointsPerMine = -5;
+	private int pointsPerStep = -1;
 	
-	int Lives;
+	int lives;
 	int score;
 	
 	
-	
-	MineFieldPanel MineFieldPanel;
+	MineFieldPanel mineFieldPanel;
 	
 	
 	JPanel scorePanel;
@@ -34,18 +34,7 @@ public class MineWalkerPanel extends JPanel {
 	JButton showMines;
 	
 	public MineWalkerPanel() {
-		addMineFieldPanel();
-		ScorePanel();
-		KeyPanel();
-		ControlPanel();
 		newGame();
-		giveUp();
-		win();
-		lose();
-		String GameOver;
-		resetScore();
-		int addPoints;
-		int addLives;
 		}
 	
 	
@@ -64,7 +53,7 @@ public class MineWalkerPanel extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			MineFieldPanel.showMines();
+			mineFieldPanel.showMines();
 			
 		}
 	}
@@ -79,13 +68,13 @@ public class MineWalkerPanel extends JPanel {
 
 
 	public void addMineFieldPanel() {
-		MineFieldPanel = new MineFieldPanel(ActionListener);
-		this.add(MineFieldPanel);
+		mineFieldPanel = new MineFieldPanel(new FieldPanelListener());
+		this.add(mineFieldPanel);
 	}
 	
 	
 
-	public void ScorePanel() {
+	public void addScorePanel() {
 		scorePanel = new JPanel();
 		scoreLabel = new JLabel();
 		scoreLabel.setText("678656578");
@@ -93,7 +82,7 @@ public class MineWalkerPanel extends JPanel {
 		this.add(scorePanel);
 	}
 	
-	public void KeyPanel() {
+	public void addKeyPanel() {
 		JButton zeroMines = new JButton();
 		zeroMines.setBackground(Color.GREEN);
 		zeroMines.setText("0 mines nearby");
@@ -102,7 +91,7 @@ public class MineWalkerPanel extends JPanel {
 		this.add(keyPanel);
     }
 	
-	public void ControlPanel() {
+	public void addControlPanel() {
 		controlPanel = new JPanel();
 		
 		JButton resetBut = new JButton();
@@ -117,16 +106,32 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void newGame() {
-		//clear MineWalkerPanel
+		// Setup a new game
+		this.removeAll();
+		// Basic setup process
+		addMineFieldPanel();
+		addScorePanel();
+		addKeyPanel();
+		addControlPanel();
+		setMaxPoints();
 		
 	}
 	
 	public void giveUp() {
+		System.out.println("Abel is a quitter");
 		
 	}
 	
 	public void win() {
+		JTextField winText = new JTextField();
+		winText.setText("");
+		this.add(winText);
+	}
+	
+	private void setMaxPoints() {
 		
+		int gridSize = mineFieldPanel.getGridSize();
+		maxPoints = Math.pow(gridSize, 2) - mineFieldPanel.getNumberOfMines();
 	}
 	
 	public void lose() {
