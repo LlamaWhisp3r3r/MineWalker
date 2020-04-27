@@ -13,7 +13,7 @@ public class MineFieldPanel extends JPanel {
 	private int gridSize;
 	private MineFieldButton[][] grid;
 	
-	public MineFieldPanel(ActionListener listener) {
+	public MineFieldPanel() {
 		
 		grid = new MineFieldButton[DEFAULT_GRID_SIZE][DEFAULT_GRID_SIZE];
 		
