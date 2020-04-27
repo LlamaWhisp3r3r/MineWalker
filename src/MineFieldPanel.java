@@ -19,8 +19,9 @@ public class MineFieldPanel extends JPanel {
 	
 	public MineFieldPanel(ActionListener listener) {
 		this.listener = listener;
+		gridSize = DEFAULT_GRID_SIZE;
 		
-		grid = new MineFieldButton[DEFAULT_GRID_SIZE][DEFAULT_GRID_SIZE];
+		grid = new MineFieldButton[gridSize][gridSize];
 		
 		//Sets the size of the grid and the number of buttons in a row.
 		this.setLayout(new GridLayout(grid.length, grid[0].length, 1, 1));
