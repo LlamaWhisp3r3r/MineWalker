@@ -4,13 +4,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public class MineFieldButton extends JButton {
-
-/* I believe I won't be able to make it to tomorrow's meeting. I would notify
- * Mr. Endicott, but I personally have no access to my phone, and I don't know exactly
- * when I will get access. I will try my best to show up, but I cannot promise much.
- * I apologize and I hope you guys understand.
- * 	-- Koen Webb
- */
 	
 	public MineFieldButton(ActionListener actionListener) {
 		ActionListener listen = actionListener;
