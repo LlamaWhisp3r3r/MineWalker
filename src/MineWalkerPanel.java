@@ -32,6 +32,7 @@ public class MineWalkerPanel extends JPanel {
 	JPanel keyPanel;
 	JPanel controlPanel;
 	JButton showMines;
+	JLabel winText;
 	
 	public MineWalkerPanel() {
 		newGame();
@@ -43,6 +44,7 @@ public class MineWalkerPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			newGame();
+			setWinText();
 			
 		}
 	}
@@ -100,7 +102,6 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void newGame() {
-		// Setup a new game
 		this.removeAll();
 		// Basic setup process
 		addMineFieldPanel();
@@ -109,6 +110,7 @@ public class MineWalkerPanel extends JPanel {
 		addControlPanel();
 		setMaxPoints();
 		
+		this.revalidate();
 	}
 	
 	public void giveUp() {
@@ -117,9 +119,11 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void win() {
-		JTextField winText = new JTextField();
-		winText.setText("");
+		this.remove(scorePanel);
+		winText = new JLabel();
+		winText.setText("Abel is Gay");
 		this.add(winText);
+		this.revalidate();
 	}
 	
 	private void setMaxPoints() {
