@@ -1,7 +1,10 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,6 +23,7 @@ public class MineWalkerPanel extends JPanel {
 	private int livesPerMine = -1;
 	private int pointsPerMine = -5;
 	private int pointsPerStep = -1;
+	private Timer timer = new Timer();
 	
 	int lives = 5;
 	int score;
@@ -33,11 +37,19 @@ public class MineWalkerPanel extends JPanel {
 	JPanel keyPanel;
 	JPanel controlPanel;
 	JButton showMines;
+	JButton resetBut;
 	JLabel winText;
 	JLabel livesLabel;
+	JLabel timerTime;
+	int minutes = 0;
+	int seconds = 0;
+	boolean pastFlag = false;
+	
 	
 	public MineWalkerPanel() {
 		newGame();
+		TimerTask updateTimer = new UpdateTimer();
+		timer.scheduleAtFixedRate(updateTimer, 1000, 1000);
 		}
 	
 	
@@ -64,38 +76,39 @@ public class MineWalkerPanel extends JPanel {
 
 
 	public void addMineFieldPanel() {
-		mineFieldPanel = new MineFieldPanel(15, new ButtonActionListener());
+		mineFieldPanel = new MineFieldPanel(5, new ButtonActionListener());
 		this.add(mineFieldPanel);
 	}
 	
 	
 
 	public void addScorePanel() {
+		minutes = 0;
+		seconds = 0;
+		lives = 5;
 		scorePanel = new JPanel();
-		scorePanel.setLayout(new GridLayout(2, 1, 10, 10));
+		scorePanel.setLayout(new GridLayout(5, 1, 10, 10));
 		scoreLabel = new JLabel();
 		livesLabel = new JLabel();
+		timerTime = new JLabel();
 		setMaxPoints();
 		score = (int) maxPoints;
 		scoreLabel.setText("Score: " + score);
 		livesLabel.setText("Lives: " + lives);
-		scorePanel.add(scoreLabel);
-		scorePanel.add(livesLabel);
-		this.add(scorePanel);
-	}
-	
-	public void updateScorePanel() {
-		scorePanel.remove(scoreLabel);
-		scorePanel.remove(livesLabel);
-		System.out.println("Entered UpdateScorePanel()");
-		scoreLabel = new JLabel();
-		livesLabel = new JLabel();
-		scoreLabel.setText("Score: " + score);
-		livesLabel.setText("Lives: " + lives);
-		scorePanel.add(scoreLabel);
-		scorePanel.add(livesLabel);
+		timerTime.setText("Time: 00.00");
 		
-		scorePanel.revalidate();
+		resetBut = new JButton();
+		resetBut.setText("Reset");
+		resetBut.addActionListener(new resetButtonListener());
+		showMines = new JButton();
+		showMines.setText("show Mines");
+		
+		scorePanel.add(timerTime);
+		scorePanel.add(scoreLabel);
+		scorePanel.add(livesLabel);
+		scorePanel.add(resetBut);
+		scorePanel.add(showMines);
+		this.add(scorePanel);
 	}
 	
 	public void addKeyPanel() {
@@ -125,19 +138,6 @@ public class MineWalkerPanel extends JPanel {
 		this.add(keyPanel);
     }
 	
-	public void addControlPanel() {
-		controlPanel = new JPanel();
-		
-		JButton resetBut = new JButton();
-		resetBut.setText("Reset");
-		resetBut.addActionListener(new resetButtonListener());
-		showMines = new JButton();
-		showMines.setText("show Mines");
-		
-		controlPanel.add(resetBut);
-		this.add(controlPanel);
-				
-	}
 	
 	public void newGame() {
 		this.removeAll();
@@ -145,7 +145,6 @@ public class MineWalkerPanel extends JPanel {
 		addMineFieldPanel();
 		addScorePanel();
 		addKeyPanel();
-		addControlPanel();
 		
 		this.revalidate();
 	}
@@ -207,17 +206,62 @@ public class MineWalkerPanel extends JPanel {
 					if(button.isMine()) {
 						button.setColor(Color.black);
 						lives--;
-						updateScorePanel();
 					}else {
 						Color buttonColor = button.getNearbyMineColor();
 						button.setColor(buttonColor);
 						button.activate();
 						score--;
-						updateScorePanel();
 					}
 				}
 				
 			}
+	}
+	
+	private class ShowMinesListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			mineFieldPanel.showMines();
+		}
+		
+	}
+	
+	private class UpdateTimer extends TimerTask {
+
+		@Override
+		public void run() {
+				seconds++;
+				if(seconds == 60) {
+					seconds = 0;
+					minutes++;
+				}
+				scorePanel.remove(resetBut);
+				scorePanel.remove(showMines);
+				scorePanel.remove(timerTime);
+				scorePanel.remove(scoreLabel);
+				scorePanel.remove(livesLabel);
+				resetBut = new JButton();
+				timerTime = new JLabel();
+				scoreLabel = new JLabel();
+				livesLabel = new JLabel();
+				resetBut.setText("Reset");
+				resetBut.addActionListener(new resetButtonListener());
+				showMines = new JButton();
+				showMines.addActionListener(new ShowMinesListener());
+				showMines.setText("Show Mines");
+				timerTime.setText("Time: " + minutes + ":" + seconds);
+				scoreLabel.setText("Score: " + score);
+				livesLabel.setText("Lives: " + lives);
+				scorePanel.add(timerTime);
+				scorePanel.add(scoreLabel);
+				scorePanel.add(livesLabel);
+				scorePanel.add(resetBut);
+				scorePanel.add(showMines);
+				scorePanel.revalidate();
+				pastFlag = !pastFlag;
+		}
+			
+		
 	}
 	
 

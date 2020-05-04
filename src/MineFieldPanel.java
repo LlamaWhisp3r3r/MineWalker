@@ -78,7 +78,9 @@ public class MineFieldPanel extends JPanel {
 					break;
 				
 				case 2:
-					grid[i][j].showMine();
+					if(grid[i][j].isMine()) {
+						grid[i][j].showMine();
+					}
 					break;
 				
 				case 3:

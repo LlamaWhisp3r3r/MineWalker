@@ -95,7 +95,7 @@ public class MineFieldButton extends JButton {
 	
 	public void showMine() {
 		if (isMine = true) {
-			ACTIVE_COLOR = MINE_COLOR;
+			setColor(Color.BLACK);;
 			mineShowing = true;
 		}
 	}
