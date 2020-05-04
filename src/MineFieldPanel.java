@@ -10,6 +10,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+
 public class MineFieldPanel extends JPanel {
 
 	private final int DEFAULT_GRID_SIZE = 10;
@@ -19,6 +20,7 @@ public class MineFieldPanel extends JPanel {
 	public int gridSize;
 	private MineFieldButton[][] grid;
 	private int numMines;
+	private ActionListener actionListener;
 
 	Random rand = new Random();
 	public int lives = 5;
@@ -203,24 +205,6 @@ public class MineFieldPanel extends JPanel {
 		}
 		
 		
-	}
-	
-	private class ButtonActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			MineFieldButton button = (MineFieldButton) arg0.getSource();
-			if(button.hasActive()) {
-				if(button.isMine()) {
-					button.setColor(Color.black);
-					lives--;
-				}else {
-					Color buttonColor = button.getNearbyMineColor();
-					button.setColor(buttonColor);
-					button.activate();
-				}
-			}
-		}
 	}
 	
 	
