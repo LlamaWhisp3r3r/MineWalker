@@ -245,7 +245,6 @@ public class MineWalkerPanel extends JPanel {
 				if(button.hasActive()) {
 					if(button.isMine()) {
 						button.setColor(Color.black);
-						button.activate();
 						lives--;
 						if(lives == 0) {
 							lose();
