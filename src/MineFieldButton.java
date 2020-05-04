@@ -38,6 +38,18 @@ public class MineFieldButton extends JButton {
 	public void visit() {
 		visited = true;
 	}
+	public boolean hasActive() {
+		for(MineFieldButton button : nieghbors) {
+			if(button.isActive()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isActive() {
+		return active;
+	}
 	
 	public void setColor(Color color) {
 		this.setBackground(color);
