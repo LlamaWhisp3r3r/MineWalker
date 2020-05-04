@@ -19,10 +19,12 @@ public class MineFieldPanel extends JPanel {
 	public int gridSize;
 	private MineFieldButton[][] grid;
 	private int numMines;
+
 	Random rand = new Random();
 	public int lives = 5;
 
-	public MineFieldPanel() {
+	public MineFieldPanel(ActionListener actionListener) {
+		this.actionListener = actionListener;
 		gridSize = DEFAULT_GRID_SIZE;
 		grid = new MineFieldButton[gridSize][gridSize];
 		
@@ -40,7 +42,8 @@ public class MineFieldPanel extends JPanel {
 		createStartAndEndPoint();
 	}
 	
-	public MineFieldPanel(int gridSize) {
+	public MineFieldPanel(int gridSize, ActionListener actionListener) {
+		this.actionListener = actionListener;
 		this.gridSize = gridSize;
 		grid = new MineFieldButton[gridSize][gridSize];
 		
@@ -65,7 +68,7 @@ public class MineFieldPanel extends JPanel {
 				switch(flagInt) {
 				case 0:
 					MineFieldButton button = new MineFieldButton();
-					button.addActionListener(new ButtonActionListener());
+					button.addActionListener(actionListener);
 					grid[i][j] = button;
 					this.add(grid[i][j]);
 					break;
@@ -196,7 +199,7 @@ public class MineFieldPanel extends JPanel {
 				x = x + 1;
 			}
 			grid[x][y].setOnPath(true);
-			path.add(grid[x][y]);
+			path.add(grid[x][y]);}
 		}
 		
 		
@@ -218,10 +221,8 @@ public class MineFieldPanel extends JPanel {
 				}
 			}
 		}
-
 	}
-
-}
+	
 	
 	
 	
