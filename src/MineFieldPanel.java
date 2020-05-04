@@ -10,6 +10,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+
 public class MineFieldPanel extends JPanel {
 
 	private final int DEFAULT_GRID_SIZE = 10;
@@ -19,9 +20,10 @@ public class MineFieldPanel extends JPanel {
 	public int gridSize;
 	private MineFieldButton[][] grid;
 	private int numMines;
+	private ActionListener actionListener;
+
 	Random rand = new Random();
 	public int lives = 5;
-	ActionListener actionListener;
 
 	public MineFieldPanel(ActionListener actionListener) {
 		this.actionListener = actionListener;
@@ -201,14 +203,12 @@ public class MineFieldPanel extends JPanel {
 				x = x + 1;
 			}
 			grid[x][y].setOnPath(true);
-			path.add(grid[x][y]);
+			path.add(grid[x][y]);}
 		}
 		
 		
 	}
 	
-
-}
 	
 	
 	
