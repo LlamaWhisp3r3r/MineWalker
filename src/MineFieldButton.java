@@ -109,7 +109,7 @@ public class MineFieldButton extends JButton {
 	
 	public void showPath() {
 		if (onPath = true) {
-			ACTIVE_COLOR = PATH_COLOR;
+			setColor(Color.GREEN);
 			pathShowing = true;
 		}
 	}

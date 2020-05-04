@@ -55,6 +55,7 @@ public class MineFieldPanel extends JPanel {
 		
 		// Creates each button, adds an action listener to them, and adds them to the panel					
 		goThroughGrid(0);
+		createPath();
 		setNumberOfMInes(DEFAULT_MINE_PERCENT);
 		setMines();
 		addAllNeighbors();
@@ -64,8 +65,10 @@ public class MineFieldPanel extends JPanel {
 	
 	private void goThroughGrid(int flagInt) {
 		for (int i = 0; i < grid.length; i++) {
+			int amountOfMinesPerRow = 5;
 			
 			for (int j = 0; j < grid[0].length; j++) {
+				
 						
 				switch(flagInt) {
 				case 0:
@@ -98,9 +101,12 @@ public class MineFieldPanel extends JPanel {
 					break;
 					
 				case 6:
-					if (numMines > 0 && grid[i][j].isOnPath() == false && rand.nextInt(100) <= DEFAULT_MINE_PERCENT && grid[i][j].isMine() == false) {
+					if (numMines > 0 && grid[i][j].isOnPath() == false && rand.nextInt(100) <= DEFAULT_MINE_PERCENT
+					&& grid[i][j].isMine() == false && amountOfMinesPerRow != 0) {
+						
 						grid[i][j].setIsMine(true);
 						numMines--;
+						amountOfMinesPerRow--;
 					}
 					break;
 					
@@ -187,23 +193,21 @@ public class MineFieldPanel extends JPanel {
 	public void createPath() {
 		MineFieldButton Start = grid[gridSize - 1][0];
 		MineFieldButton End = grid[0][gridSize - 1];
-		int x = 0;
-		int y = gridSize - 1;
+		int x = gridSize - 1;
+		int y = 0;
 		Random rand = new Random();
 		
-		ArrayList<MineFieldButton> path = new ArrayList<MineFieldButton>();
+		Start.setOnPath(true);
+		End.setOnPath(true);
+		End.setIsEnd(true);
 		while (grid[x][y] != End) {
-			if (rand.nextBoolean() == true && x != gridSize - 1) {
-				x = x + 1;
+			if (rand.nextBoolean() == true && x != 0) {
+				x = x - 1;
 			}
-			else if (y != 0) {
-				y = y - 1;
-			} 
-			else if (x != gridSize - 1) {
-				x = x + 1;
+			else if (y != gridSize -1){
+				y = y + 1;
 			}
-			grid[x][y].setOnPath(true);
-			path.add(grid[x][y]);}
+			grid[x][y].setOnPath(true);}
 		}
 		
 		
