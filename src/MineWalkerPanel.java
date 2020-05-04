@@ -14,8 +14,7 @@ import javax.swing.JTextField;
 
 public class MineWalkerPanel extends JPanel {
 
-	
-	private final int MAX_LIVES = 5;
+	private int currentLiveAmount = 5;
 	double maxPoints;
 	private int livesPerMine = -1;
 	private int pointsPerMine = -5;
@@ -72,7 +71,9 @@ public class MineWalkerPanel extends JPanel {
 	public void addScorePanel() {
 		scorePanel = new JPanel();
 		scoreLabel = new JLabel();
-		scoreLabel.setText("678656578");
+		
+		setMaxPoints();
+		scoreLabel.setText(maxPoints + "");
 		scorePanel.add(scoreLabel);
 		this.add(scorePanel);
 	}
@@ -125,7 +126,6 @@ public class MineWalkerPanel extends JPanel {
 		addScorePanel();
 		addKeyPanel();
 		addControlPanel();
-		setMaxPoints();
 		
 		this.revalidate();
 	}

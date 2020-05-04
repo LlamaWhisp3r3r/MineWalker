@@ -1,8 +1,11 @@
+
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -17,6 +20,7 @@ public class MineFieldPanel extends JPanel {
 	private MineFieldButton[][] grid;
 	private int numMines;
 	Random rand = new Random();
+	public int lives = 5;
 
 	public MineFieldPanel() {
 		gridSize = DEFAULT_GRID_SIZE;
@@ -29,6 +33,7 @@ public class MineFieldPanel extends JPanel {
 		// Creates each button, adds an action listener to them, and adds them to the panel 
 		// And adds mines and all neighbors
 		goThroughGrid(0);
+		createPath();
 		setNumberOfMInes(DEFAULT_MINE_PERCENT);
 		setMines();
 		addAllNeighbors();
@@ -172,6 +177,49 @@ public class MineFieldPanel extends JPanel {
 		
 	}
 
+	public void createPath() {
+		MineFieldButton Start = grid[gridSize - 1][0];
+		MineFieldButton End = grid[0][gridSize - 1];
+		int x = 0;
+		int y = gridSize - 1;
+		Random rand = new Random();
+		
+		ArrayList<MineFieldButton> path = new ArrayList<MineFieldButton>();
+		while (grid[x][y] != End) {
+			if (rand.nextBoolean() == true && x != gridSize - 1) {
+				x = x + 1;
+			}
+			else if (y != 0) {
+				y = y - 1;
+			} 
+			else if (x != gridSize - 1) {
+				x = x + 1;
+			}
+			grid[x][y].setOnPath(true);
+			path.add(grid[x][y]);
+		}
+		
+		
+	}
+	
+	private class ButtonActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			MineFieldButton button = (MineFieldButton) arg0.getSource();
+			if(button.hasActive()) {
+				if(button.isMine()) {
+					button.setColor(Color.black);
+					lives--;
+				}else {
+					Color buttonColor = button.getNearbyMineColor();
+					button.setColor(buttonColor);
+					button.activate();
+				}
+			}
+		}
+
+	}
 
 }
 	
