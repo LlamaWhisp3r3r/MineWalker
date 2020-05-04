@@ -21,8 +21,10 @@ public class MineFieldPanel extends JPanel {
 	private int numMines;
 	Random rand = new Random();
 	public int lives = 5;
+	ActionListener actionListener;
 
-	public MineFieldPanel() {
+	public MineFieldPanel(ActionListener actionListener) {
+		this.actionListener = actionListener;
 		gridSize = DEFAULT_GRID_SIZE;
 		grid = new MineFieldButton[gridSize][gridSize];
 		
@@ -40,7 +42,8 @@ public class MineFieldPanel extends JPanel {
 		createStartAndEndPoint();
 	}
 	
-	public MineFieldPanel(int gridSize) {
+	public MineFieldPanel(int gridSize, ActionListener actionListener) {
+		this.actionListener = actionListener;
 		this.gridSize = gridSize;
 		grid = new MineFieldButton[gridSize][gridSize];
 		
@@ -65,7 +68,7 @@ public class MineFieldPanel extends JPanel {
 				switch(flagInt) {
 				case 0:
 					MineFieldButton button = new MineFieldButton();
-					button.addActionListener(new ButtonActionListener());
+					button.addActionListener(actionListener);
 					grid[i][j] = button;
 					this.add(grid[i][j]);
 					break;
@@ -202,24 +205,6 @@ public class MineFieldPanel extends JPanel {
 		
 	}
 	
-	private class ButtonActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			MineFieldButton button = (MineFieldButton) arg0.getSource();
-			if(button.hasActive()) {
-				if(button.isMine()) {
-					button.setColor(Color.black);
-					lives--;
-				}else {
-					Color buttonColor = button.getNearbyMineColor();
-					button.setColor(buttonColor);
-					button.activate();
-				}
-			}
-		}
-
-	}
 
 }
 	

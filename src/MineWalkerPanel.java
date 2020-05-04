@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.ArrayList;
+import java.util.Random;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,7 +21,7 @@ public class MineWalkerPanel extends JPanel {
 	private int pointsPerMine = -5;
 	private int pointsPerStep = -1;
 	
-	int lives;
+	int lives = 5;
 	int score;
 	
 	
@@ -33,6 +34,7 @@ public class MineWalkerPanel extends JPanel {
 	JPanel controlPanel;
 	JButton showMines;
 	JLabel winText;
+	JLabel livesLabel;
 	
 	public MineWalkerPanel() {
 		newGame();
@@ -62,7 +64,7 @@ public class MineWalkerPanel extends JPanel {
 
 
 	public void addMineFieldPanel() {
-		mineFieldPanel = new MineFieldPanel(15);
+		mineFieldPanel = new MineFieldPanel(15, new ButtonActionListener());
 		this.add(mineFieldPanel);
 	}
 	
@@ -70,12 +72,30 @@ public class MineWalkerPanel extends JPanel {
 
 	public void addScorePanel() {
 		scorePanel = new JPanel();
+		scorePanel.setLayout(new GridLayout(2, 1, 10, 10));
 		scoreLabel = new JLabel();
-		
+		livesLabel = new JLabel();
 		setMaxPoints();
-		scoreLabel.setText(maxPoints + "");
+		score = (int) maxPoints;
+		scoreLabel.setText("Score: " + score);
+		livesLabel.setText("Lives: " + lives);
 		scorePanel.add(scoreLabel);
+		scorePanel.add(livesLabel);
 		this.add(scorePanel);
+	}
+	
+	public void updateScorePanel() {
+		scorePanel.remove(scoreLabel);
+		scorePanel.remove(livesLabel);
+		System.out.println("Entered UpdateScorePanel()");
+		scoreLabel = new JLabel();
+		livesLabel = new JLabel();
+		scoreLabel.setText("Score: " + score);
+		livesLabel.setText("Lives: " + lives);
+		scorePanel.add(scoreLabel);
+		scorePanel.add(livesLabel);
+		
+		scorePanel.revalidate();
 	}
 	
 	public void addKeyPanel() {
@@ -136,7 +156,6 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void win() {
-		this.remove(scorePanel);
 		winText = new JLabel();
 		winText.setText("Abel is Gay");
 		this.add(winText);
@@ -177,25 +196,29 @@ public class MineWalkerPanel extends JPanel {
 		return 1;
 	}
 	
-	
-	private class MineFieldButtonListener implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			MineFieldButton clicked = (MineFieldButton) e.getSource();
-			
-			clicked.visit();
-		}
-	}
-	
-	private class ShowMinesListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			
-		}
+	private class ButtonActionListener implements ActionListener {
 		
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MineFieldButton button = (MineFieldButton) arg0.getSource();
+				
+				if(button.hasActive()) {
+					if(button.isMine()) {
+						button.setColor(Color.black);
+						lives--;
+						updateScorePanel();
+					}else {
+						Color buttonColor = button.getNearbyMineColor();
+						button.setColor(buttonColor);
+						button.activate();
+						score--;
+						updateScorePanel();
+					}
+				}
+				
+			}
 	}
+	
+
 }
