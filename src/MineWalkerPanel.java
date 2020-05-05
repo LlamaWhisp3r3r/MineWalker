@@ -23,6 +23,8 @@ public class MineWalkerPanel extends JPanel {
 	private int livesPerMine = -1;
 	private int pointsPerMine = -5;
 	private int pointsPerStep = -1;
+	private int secretNumber = 0;
+	private int extraSecretNumber = 0;
 	private Timer timer = new Timer();
 	
 	int lives = 5;
@@ -73,6 +75,31 @@ public class MineWalkerPanel extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			mineFieldPanel.showPath();
 			
+		}
+	}
+	
+	private class HiddenSecretThing implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			secretNumber++;
+			if(secretNumber == 5) {
+				mineFieldPanel.showMines();
+				secretNumber = 0;
+			}
+		}
+		
+	}
+	
+	private class ExtraHiddenSecretThing implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			extraSecretNumber++;
+			if(extraSecretNumber == 5) {
+				mineFieldPanel.showPath();
+				extraSecretNumber = 0;
+			}
 		}
 	}
 
@@ -127,12 +154,14 @@ public class MineWalkerPanel extends JPanel {
 		twoMine = new JButton();
 		twoMine.setBackground(Color.orange);
 		twoMine.setText("2 Mine Nearby");
+		twoMine.addActionListener(new ExtraHiddenSecretThing());
 		threeMine = new JButton();
 		threeMine.setBackground(Color.red);
 		threeMine.setText("3 Mine Nearby");
 		mine = new JButton();
 		mine.setBackground(Color.black);
 		mine.setText("Exploded Mine");
+		mine.addActionListener(new HiddenSecretThing());
 		keyPanel.add(zeroMines);
 		keyPanel.add(oneMine);
 		keyPanel.add(twoMine);
@@ -149,7 +178,7 @@ public class MineWalkerPanel extends JPanel {
 		addScorePanel();
 		addKeyPanel();
 		
-		this.revalidate();
+		this.updateUI();
 	}
 	
 	public void giveUp() {
@@ -158,21 +187,24 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void win() {
-		timer.cancel();
 		System.out.println("Removed All");
 		this.remove(keyPanel);
 		this.remove(scorePanel);
 		JPanel panelDude = new JPanel();
-		panelDude.setLayout(new GridLayout(3, 1, 10, 10));
+		panelDude.setLayout(new GridLayout(4, 1, 10, 10));
 		JLabel winText = new JLabel();
 		JLabel minutesLabel = new JLabel();
 		JLabel secondsLabel = new JLabel();
+		JButton restartButton = new JButton();
+		restartButton.setText("Restart Game");
+		restartButton.addActionListener(new resetButtonListener());
 		secondsLabel.setText("            Seconds: " + seconds);
 		minutesLabel.setText("            Minutes: " + minutes);
 		winText.setText("====Yay You Won!=====");
 		panelDude.add(winText);
 		panelDude.add(minutesLabel);
 		panelDude.add(secondsLabel);
+		panelDude.add(restartButton);
 		this.add(panelDude);
 		this.updateUI();
 	}
@@ -184,7 +216,6 @@ public class MineWalkerPanel extends JPanel {
 	}
 	
 	public void lose() {
-		timer.cancel();
 		System.out.println("Removed All");
 		this.remove(keyPanel);
 		this.remove(scorePanel);

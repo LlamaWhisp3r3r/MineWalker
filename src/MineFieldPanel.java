@@ -15,7 +15,7 @@ public class MineFieldPanel extends JPanel {
 
 	private final int DEFAULT_GRID_SIZE = 10;
 	//private final double MIN_MINE_PERCENT = 20;
-	private final double DEFAULT_MINE_PERCENT = 75;
+	private final double DEFAULT_MINE_PERCENT = 25;
 	//private final double MAX_MINE_PERCENT = 35;
 	public int gridSize;
 	private MineFieldButton[][] grid;
@@ -93,7 +93,10 @@ public class MineFieldPanel extends JPanel {
 					break;
 					
 				case 4:
-					grid[i][j].showPath();
+					if(grid[i][j].isOnPath()) {
+						grid[i][j].showPath();
+						grid[i][j].visit();
+					}
 					break;
 					
 				case 5: 
