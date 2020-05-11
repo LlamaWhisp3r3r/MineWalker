@@ -269,7 +269,7 @@ public class MineWalkerPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				MineFieldButton button = (MineFieldButton) arg0.getSource();
 				
-				if(button.isEnd()) {
+				if(button.isEnd() && button.hasActive()) {
 					win();
 				}else {
 				
